@@ -7,15 +7,18 @@ var mongoose = require('mongoose')
 module.exports = server = express()
 server.use(bodyparser.json())
 mongoose.Promise = global.Promise
-mongoose.connect("mongodb://localhost:27017/satisfy")
+
 
 // Checking port
 var port = process.env.PORT || 3000
 if (process.env.NODE_ENV != "test") {
-  if (port != 3000)
+  if (port != 3000){
     process.env.NODE_ENV = "prod"
-  else
+    mongoose.connect("mongodb://user:password@ds147469.mlab.com:47469/heroku_t3zzv2rl")
+  } else{
     process.env.NODE_ENV = "dev"
+    mongoose.connect("mongodb://localhost:27017/satisfy")
+  }
 }
 
 // Create models
