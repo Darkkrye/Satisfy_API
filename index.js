@@ -57,6 +57,7 @@ server.get('/api/satisfaction', function(req, res){
 
 server.post('/api/satisfaction', function(req, res){
   var satisfaction = new Satisfaction(req.body);
+  satisfaction.Date = new Date();
   console.log(satisfaction);
   satisfaction.save(function(error, instance){
     if(error){
